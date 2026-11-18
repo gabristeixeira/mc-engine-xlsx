@@ -6,6 +6,19 @@ Motor de simulação de Monte Carlo, em Python, para modelos financeiros constru
 
 Material do Trabalho de Conclusão de Curso "Proposta de framework metodológico para integração nativa da Simulação de Monte Carlo em modelos financeiros de avaliação de projetos de mineração" (Controladoria e Finanças, UFMG, 2026). Autor: Gabriel Santos Teixeira. Orientador: Prof. Dr. Marcos Antônio de Camargos. Coorientador: MSc. César Augusto Camargos Rocha.
 
+## O que há neste repositório
+
+| Arquivo | O que é |
+|---|---|
+| `mc_engine.py` | O motor de simulação (código completo, comentado). |
+| `graficos.py` | Gera o histograma do VPL e o gráfico de tornado a partir da saída do motor. |
+| `testes_aderencia.py` | Testes de aderência da amostragem às distribuições declaradas (Kolmogorov-Smirnov e Anderson-Darling), Camada 2 da validação. |
+| `Historico_FX_Niquel_out2019_dez2022.xlsx` | Série mensal de câmbio USD/BRL e preço do níquel (out/2019 a dez/2022), formatada para abrir no Excel. O mesmo conteúdo está no `.csv`, que é o arquivo lido pelo script. |
+| `analise_correlacao.py` | Estimativa da correlação entre preço do níquel e câmbio (dados em `Historico_FX_Niquel_out2019_dez2022.csv`) e seu efeito no VPL. Requer o modelo do Projeto Serra Alta, que não é público. |
+| `exemplos/CarLangA_Reconstrucao_NI43101.xlsx` | Reconstrução do projeto CarLang A a partir do relatório técnico NI 43-101 (SRK; Caracle Creek, 2025), usada como teste de robustez do motor. |
+
+O modelo financeiro do Projeto Serra Alta não é distribuído, pois deriva de dados de uma empresa privada.
+
 ## Instalação
 
 ```
@@ -107,19 +120,6 @@ Saída: `FluxoCaixa!C46`, VPL pós-impostos a 8% (C$ milhões), tipo `direto`.
 | AssertionError: Address "Aba!Cel" not found in the cell map | a célula de entrada não é usada por nenhuma fórmula que leve às saídas | ligar a alavanca ao cálculo ou removê-la do bloco `INPUTS` |
 | Function X is not implemented (UnknownFunction) | a planilha usa uma função que a pycel não implementa (IRR, XIRR, XNPV, PMT) | substituir por fórmula equivalente; para a TIR, declarar `serie_fcl` e `serie_datas` |
 | Correlações inconsistentes | coeficiente fora de (-1, 1), variável não declarada ou matriz não positiva definida | revisar o bloco `CORRELACOES` |
-
-## Conteúdo
-
-| Arquivo | O que é |
-|---|---|
-| `mc_engine.py` | O motor de simulação (código completo, comentado). |
-| `graficos.py` | Gera o histograma do VPL e o gráfico de tornado a partir da saída do motor. |
-| `testes_aderencia.py` | Testes de aderência da amostragem às distribuições declaradas (Kolmogorov-Smirnov e Anderson-Darling), Camada 2 da validação. |
-| `Historico_FX_Niquel_out2019_dez2022.xlsx` | Série mensal de câmbio USD/BRL e preço do níquel (out/2019 a dez/2022), formatada para abrir no Excel. O mesmo conteúdo está no `.csv`, que é o arquivo lido pelo script. |
-| `analise_correlacao.py` | Estimativa da correlação entre preço do níquel e câmbio (dados em `Historico_FX_Niquel_out2019_dez2022.csv`) e seu efeito no VPL. Requer o modelo do Projeto Serra Alta, que não é público. |
-| `exemplos/CarLangA_Reconstrucao_NI43101.xlsx` | Reconstrução do projeto CarLang A a partir do relatório técnico NI 43-101 (SRK; Caracle Creek, 2025), usada como teste de robustez do motor. |
-
-O modelo financeiro do Projeto Serra Alta não é distribuído, pois deriva de dados de uma empresa privada.
 
 ## Licença
 
